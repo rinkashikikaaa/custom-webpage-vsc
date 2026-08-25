@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top white bar -->
+    <div class="top-bar">
+        <div class="language-section">
+            <span class="language-label">Language</span>
+        </div>
+    </div>
+
+    <!-- Main background -->
+    <div class="main-container">
+        <!-- Main title -->
+        <h1 class="main-title">Welcome</h1>
+
+        <!-- Subtitle -->
+        <p class="subtitle">What do you want to see?</p>
+
+        <!-- Business and User buttons -->
+        <div class="button-container">
+            <button class="nav-button" data-section="business">Business</button>
+            <button class="nav-button" data-section="user">User</button>
+        </div>
+
+        <!-- Business submenu -->
+        <div class="submenu" id="business-submenu">
+            <button class="sub-button">About Me</button>
+            <button class="sub-button">Portfolio</button>
+        </div>
+
+        <!-- User submenu -->
+        <div class="submenu" id="user-submenu">
+            <button class="sub-button">About Me</button>
+            <button class="sub-button">Socials</button>
+            <button class="sub-button">Merch</button>
+            <button class="sub-button">Projects</button>
+        </div>
+    </div>
+
+    <!-- Language selection panel (hidden by default) -->
+    <div class="language-panel" id="languagePanel">
+        <div class="language-panel-content">
+            <p class="language-panel-title">Select your language</p>
+            <div class="language-options">
+                <button class="language-option" data-lang="ja">日本語</button>
+                <button class="language-option" data-lang="de">Deutsch</button>
+                <button class="language-option" data-lang="en" data-selected="true">English</button>
+                <button class="language-option" data-lang="es">Español</button>
+            </div>
+            <button class="language-confirm-button" id="confirmButton">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Overlay for language panel -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
