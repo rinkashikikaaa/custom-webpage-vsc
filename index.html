@@ -413,16 +413,16 @@
 
         <!-- Business submenu -->
         <div class="submenu" id="business-submenu">
-            <button class="sub-button">About Me</button>
-            <button class="sub-button">Portfolio</button>
+            <button class="sub-button" data-page="about-me-business">About Me</button>
+            <button class="sub-button" data-page="portfolio">Portfolio</button>
         </div>
 
         <!-- User submenu -->
         <div class="submenu" id="user-submenu">
-            <button class="sub-button">About Me</button>
-            <button class="sub-button">Socials</button>
-            <button class="sub-button">Merch</button>
-            <button class="sub-button">Projects</button>
+            <button class="sub-button" data-page="about-me-user">About Me</button>
+            <button class="sub-button" data-page="socials">Socials</button>
+            <button class="sub-button" data-page="merch">Merch</button>
+            <button class="sub-button" data-page="projects">Projects</button>
         </div>
     </div>
 
@@ -530,6 +530,7 @@
         const businessSubmenu = document.getElementById('business-submenu');
         const userSubmenu = document.getElementById('user-submenu');
         const navButtons = document.querySelectorAll('.nav-button');
+        const subButtons = document.querySelectorAll('.sub-button');
         const mainContainer = document.getElementById('mainContainer');
         const detailContainer = document.getElementById('detailContainer');
         const detailTitle = document.getElementById('detailTitle');
@@ -564,6 +565,11 @@
             // Nav buttons click
             navButtons.forEach(button => {
                 button.addEventListener('click', handleNavButtonClick);
+            });
+
+            // Sub buttons click
+            subButtons.forEach(button => {
+                button.addEventListener('click', handleSubButtonClick);
             });
 
             // Back button click
@@ -640,22 +646,8 @@
 
             // Update detail title if on detail page
             if (currentPage === 'detail') {
-                if (detailTitle.textContent === translations.en.business || 
-                    detailTitle.textContent === translations.ja.business ||
-                    detailTitle.textContent === translations.de.business ||
-                    detailTitle.textContent === translations.es.business) {
-                    detailTitle.textContent = t.business;
-                } else if (detailTitle.textContent === translations.en.user || 
-                          detailTitle.textContent === translations.ja.user ||
-                          detailTitle.textContent === translations.de.user ||
-                          detailTitle.textContent === translations.es.user) {
-                    detailTitle.textContent = t.user;
-                } else if (detailTitle.textContent === translations.en.donations || 
-                          detailTitle.textContent === translations.ja.donations ||
-                          detailTitle.textContent === translations.de.donations ||
-                          detailTitle.textContent === translations.es.donations) {
-                    detailTitle.textContent = t.donations;
-                }
+                const pageTitle = getPageTitle(currentPageId, lang);
+                detailTitle.textContent = pageTitle;
             }
         }
 
@@ -683,12 +675,35 @@
             }
         }
 
-        function goToDetailPage(title) {
+        let currentPageId = null;
+
+        function handleSubButtonClick(e) {
+            const pageId = e.target.dataset.page;
+            const pageTitle = getPageTitle(pageId, currentLanguage);
+            goToDetailPage(pageTitle, pageId);
+        }
+
+        function getPageTitle(pageId, lang) {
+            const t = translations[lang];
+            const titles = {
+                'about-me-business': t.aboutMe,
+                'portfolio': t.portfolio,
+                'about-me-user': t.aboutMe,
+                'socials': t.socials,
+                'merch': t.merch,
+                'projects': t.projects,
+                'donations': t.donations
+            };
+            return titles[pageId] || pageId;
+        }
+
+        function goToDetailPage(title, pageId) {
             mainContainer.classList.add('hidden');
             detailContainer.classList.add('show');
             detailTitle.textContent = title;
             backButton.classList.add('show');
             currentPage = 'detail';
+            currentPageId = pageId;
         }
 
         function goBackToMain() {
@@ -698,21 +713,12 @@
             businessSubmenu.classList.remove('active');
             userSubmenu.classList.remove('active');
             currentPage = 'main';
+            currentPageId = null;
         }
 
         function goToDonations() {
-            const t = translations[currentLanguage];
-            goToDetailPage(t.donations);
+            goToDetailPage(translations[currentLanguage].donations, 'donations');
         }
-
-        // Add click listeners to nav buttons to go to detail page
-        navButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                setTimeout(() => {
-                    goToDetailPage(e.target.textContent);
-                }, 300);
-            });
-        });
     </script>
 </body>
 </html>
