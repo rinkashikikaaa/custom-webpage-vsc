@@ -62,6 +62,10 @@
             cursor: pointer;
         }
 
+        .language-section.hidden {
+            display: none;
+        }
+
         .language-label {
             color: black;
             font-size: 16px;
@@ -392,7 +396,7 @@
     <!-- Top white bar -->
     <div class="top-bar">
         <button class="back-button" id="backButton">←</button>
-        <div class="language-section">
+        <div class="language-section" id="languageSection">
             <span class="language-label">Language</span>
         </div>
     </div>
@@ -468,7 +472,8 @@
                 selectLanguage: 'Select your language',
                 language: 'Language',
                 confirm: 'Confirm',
-                donations: 'Donations'
+                donations: 'Donations',
+                donate: 'Donate!'
             },
             ja: {
                 welcome: 'ようこそ',
@@ -483,7 +488,8 @@
                 selectLanguage: 'あなたの言語を選択してください',
                 language: '言語',
                 confirm: '確認',
-                donations: '寄付'
+                donations: '寄付',
+                donate: '寄付する！'
             },
             de: {
                 welcome: 'Willkommen',
@@ -498,7 +504,8 @@
                 selectLanguage: 'Wählen Sie Ihre Sprache',
                 language: 'Sprache',
                 confirm: 'Bestätigen',
-                donations: 'Spenden'
+                donations: 'Spenden',
+                donate: 'Spenden!'
             },
             es: {
                 welcome: 'Bienvenido',
@@ -513,7 +520,8 @@
                 selectLanguage: 'Selecciona tu idioma',
                 language: 'Idioma',
                 confirm: 'Confirmar',
-                donations: 'Donaciones'
+                donations: 'Donaciones',
+                donate: '¡Donar!'
             }
         };
 
@@ -523,6 +531,7 @@
 
         // DOM elements
         const languageLabel = document.querySelector('.language-label');
+        const languageSection = document.getElementById('languageSection');
         const languagePanel = document.getElementById('languagePanel');
         const overlay = document.getElementById('overlay');
         const confirmButton = document.getElementById('confirmButton');
@@ -549,7 +558,7 @@
 
         function setupEventListeners() {
             // Language section click
-            document.querySelector('.language-section').addEventListener('click', openLanguagePanel);
+            languageSection.addEventListener('click', openLanguagePanel);
 
             // Overlay click
             overlay.addEventListener('click', closeLanguagePanel);
@@ -627,6 +636,9 @@
             // Update confirm button
             confirmButton.textContent = t.confirm;
 
+            // Update donate label
+            donateLabel.textContent = t.donate;
+
             // Update nav buttons
             const businessBtn = navButtons[0];
             const userBtn = navButtons[1];
@@ -702,6 +714,7 @@
             detailContainer.classList.add('show');
             detailTitle.textContent = title;
             backButton.classList.add('show');
+            languageSection.classList.add('hidden');
             currentPage = 'detail';
             currentPageId = pageId;
         }
@@ -710,6 +723,7 @@
             mainContainer.classList.remove('hidden');
             detailContainer.classList.remove('show');
             backButton.classList.remove('show');
+            languageSection.classList.remove('hidden');
             businessSubmenu.classList.remove('active');
             userSubmenu.classList.remove('active');
             currentPage = 'main';
