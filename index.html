@@ -24,14 +24,38 @@
             height: 80px;
             background-color: white;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
+            padding-left: 30px;
             padding-right: 30px;
             position: fixed;
             top: 0;
             left: 0;
             z-index: 100;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            display: none;
+            background-color: #F0ADC6;
+            border: 2px solid black;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 20px;
+            color: black;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+
+        .back-button.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .language-section {
@@ -62,6 +86,25 @@
             background-color: #F0ADC6;
         }
 
+        .main-container.hidden {
+            display: none;
+        }
+
+        /* Detail page container */
+        .detail-container {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 80px;
+            background-color: #F0ADC6;
+        }
+
+        .detail-container.show {
+            display: flex;
+        }
+
         /* Main title */
         .main-title {
             font-size: 72px;
@@ -69,6 +112,14 @@
             color: white;
             text-align: center;
             margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-title {
+            font-size: 72px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -145,6 +196,52 @@
         .sub-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Donate button */
+        .donate-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .donate-button:hover {
+            transform: scale(1.1);
+        }
+
+        .donate-label {
+            position: fixed;
+            bottom: 30px;
+            right: 90px;
+            background-color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: black;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .donate-button:hover ~ .donate-label,
+        .donate-label:hover {
+            opacity: 1;
+            pointer-events: all;
         }
 
         /* Language panel */
@@ -254,17 +351,39 @@
                 margin-bottom: 30px;
             }
 
+            .detail-title {
+                font-size: 48px;
+            }
+
             .top-bar {
                 height: 60px;
                 padding-right: 20px;
+                padding-left: 20px;
             }
 
             .main-container {
                 padding-top: 60px;
             }
 
+            .detail-container {
+                padding-top: 60px;
+            }
+
             .language-panel {
                 padding: 30px 20px;
+            }
+
+            .donate-button {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .donate-label {
+                bottom: 20px;
+                right: 70px;
+                font-size: 12px;
             }
         }
     </style>
@@ -272,13 +391,14 @@
 <body>
     <!-- Top white bar -->
     <div class="top-bar">
+        <button class="back-button" id="backButton">←</button>
         <div class="language-section">
             <span class="language-label">Language</span>
         </div>
     </div>
 
-    <!-- Main background -->
-    <div class="main-container">
+    <!-- Main page -->
+    <div class="main-container" id="mainContainer">
         <!-- Main title -->
         <h1 class="main-title">Welcome</h1>
 
@@ -305,6 +425,15 @@
             <button class="sub-button">Projects</button>
         </div>
     </div>
+
+    <!-- Detail page -->
+    <div class="detail-container" id="detailContainer">
+        <h1 class="detail-title" id="detailTitle">Business</h1>
+    </div>
+
+    <!-- Donate button -->
+    <button class="donate-button" id="donateButton">❤️</button>
+    <div class="donate-label" id="donateLabel">Donate!</div>
 
     <!-- Language selection panel (hidden by default) -->
     <div class="language-panel" id="languagePanel">
@@ -338,7 +467,8 @@
                 projects: 'Projects',
                 selectLanguage: 'Select your language',
                 language: 'Language',
-                confirm: 'Confirm'
+                confirm: 'Confirm',
+                donations: 'Donations'
             },
             ja: {
                 welcome: 'ようこそ',
@@ -352,7 +482,8 @@
                 projects: 'プロジェクト',
                 selectLanguage: 'あなたの言語を選択してください',
                 language: '言語',
-                confirm: '確認'
+                confirm: '確認',
+                donations: '寄付'
             },
             de: {
                 welcome: 'Willkommen',
@@ -366,7 +497,8 @@
                 projects: 'Projekte',
                 selectLanguage: 'Wählen Sie Ihre Sprache',
                 language: 'Sprache',
-                confirm: 'Bestätigen'
+                confirm: 'Bestätigen',
+                donations: 'Spenden'
             },
             es: {
                 welcome: 'Bienvenido',
@@ -380,12 +512,14 @@
                 projects: 'Proyectos',
                 selectLanguage: 'Selecciona tu idioma',
                 language: 'Idioma',
-                confirm: 'Confirmar'
+                confirm: 'Confirmar',
+                donations: 'Donaciones'
             }
         };
 
         let currentLanguage = 'en';
         let selectedLanguage = 'en';
+        let currentPage = 'main'; // 'main' or 'detail'
 
         // DOM elements
         const languageLabel = document.querySelector('.language-label');
@@ -396,6 +530,12 @@
         const businessSubmenu = document.getElementById('business-submenu');
         const userSubmenu = document.getElementById('user-submenu');
         const navButtons = document.querySelectorAll('.nav-button');
+        const mainContainer = document.getElementById('mainContainer');
+        const detailContainer = document.getElementById('detailContainer');
+        const detailTitle = document.getElementById('detailTitle');
+        const backButton = document.getElementById('backButton');
+        const donateButton = document.getElementById('donateButton');
+        const donateLabel = document.getElementById('donateLabel');
 
         // Initialize
         initialize();
@@ -425,6 +565,12 @@
             navButtons.forEach(button => {
                 button.addEventListener('click', handleNavButtonClick);
             });
+
+            // Back button click
+            backButton.addEventListener('click', goBackToMain);
+
+            // Donate button click
+            donateButton.addEventListener('click', goToDonations);
         }
 
         function openLanguagePanel() {
@@ -491,6 +637,26 @@
             userSubButtons[1].textContent = t.socials;
             userSubButtons[2].textContent = t.merch;
             userSubButtons[3].textContent = t.projects;
+
+            // Update detail title if on detail page
+            if (currentPage === 'detail') {
+                if (detailTitle.textContent === translations.en.business || 
+                    detailTitle.textContent === translations.ja.business ||
+                    detailTitle.textContent === translations.de.business ||
+                    detailTitle.textContent === translations.es.business) {
+                    detailTitle.textContent = t.business;
+                } else if (detailTitle.textContent === translations.en.user || 
+                          detailTitle.textContent === translations.ja.user ||
+                          detailTitle.textContent === translations.de.user ||
+                          detailTitle.textContent === translations.es.user) {
+                    detailTitle.textContent = t.user;
+                } else if (detailTitle.textContent === translations.en.donations || 
+                          detailTitle.textContent === translations.ja.donations ||
+                          detailTitle.textContent === translations.de.donations ||
+                          detailTitle.textContent === translations.es.donations) {
+                    detailTitle.textContent = t.donations;
+                }
+            }
         }
 
         function setDefaultLanguageOption() {
@@ -516,6 +682,37 @@
                 userSubmenu.classList.add('active');
             }
         }
+
+        function goToDetailPage(title) {
+            mainContainer.classList.add('hidden');
+            detailContainer.classList.add('show');
+            detailTitle.textContent = title;
+            backButton.classList.add('show');
+            currentPage = 'detail';
+        }
+
+        function goBackToMain() {
+            mainContainer.classList.remove('hidden');
+            detailContainer.classList.remove('show');
+            backButton.classList.remove('show');
+            businessSubmenu.classList.remove('active');
+            userSubmenu.classList.remove('active');
+            currentPage = 'main';
+        }
+
+        function goToDonations() {
+            const t = translations[currentLanguage];
+            goToDetailPage(t.donations);
+        }
+
+        // Add click listeners to nav buttons to go to detail page
+        navButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                setTimeout(() => {
+                    goToDetailPage(e.target.textContent);
+                }, 300);
+            });
+        });
     </script>
 </body>
 </html>
