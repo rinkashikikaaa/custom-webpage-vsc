@@ -528,6 +528,7 @@
         let currentLanguage = 'en';
         let selectedLanguage = 'en';
         let currentPage = 'main'; // 'main' or 'detail'
+        let currentPageId = null;
 
         // DOM elements
         const languageLabel = document.querySelector('.language-label');
@@ -551,9 +552,17 @@
         initialize();
 
         function initialize() {
+            // Load saved language and page from localStorage
+            loadSavedState();
+            
             updatePageText(currentLanguage);
             setDefaultLanguageOption();
             setupEventListeners();
+            
+            // Restore page state if needed
+            if (currentPage === 'detail' && currentPageId) {
+                restoreDetailPage();
+            }
         }
 
         function setupEventListeners() {
@@ -614,6 +623,7 @@
             if (selectedLanguage !== currentLanguage) {
                 currentLanguage = selectedLanguage;
                 updatePageText(currentLanguage);
+                saveState();
             }
             closeLanguagePanel();
         }
@@ -657,7 +667,7 @@
             userSubButtons[3].textContent = t.projects;
 
             // Update detail title if on detail page
-            if (currentPage === 'detail') {
+            if (currentPage === 'detail' && currentPageId) {
                 const pageTitle = getPageTitle(currentPageId, lang);
                 detailTitle.textContent = pageTitle;
             }
@@ -665,9 +675,9 @@
 
         function setDefaultLanguageOption() {
             languageOptions.forEach(option => {
-                if (option.dataset.lang === 'en') {
+                if (option.dataset.lang === currentLanguage) {
                     option.classList.add('selected');
-                    selectedLanguage = 'en';
+                    selectedLanguage = currentLanguage;
                 }
             });
         }
@@ -686,8 +696,6 @@
                 userSubmenu.classList.add('active');
             }
         }
-
-        let currentPageId = null;
 
         function handleSubButtonClick(e) {
             const pageId = e.target.dataset.page;
@@ -717,6 +725,16 @@
             languageSection.classList.add('hidden');
             currentPage = 'detail';
             currentPageId = pageId;
+            saveState();
+        }
+
+        function restoreDetailPage() {
+            mainContainer.classList.add('hidden');
+            detailContainer.classList.add('show');
+            const pageTitle = getPageTitle(currentPageId, currentLanguage);
+            detailTitle.textContent = pageTitle;
+            backButton.classList.add('show');
+            languageSection.classList.add('hidden');
         }
 
         function goBackToMain() {
@@ -728,10 +746,31 @@
             userSubmenu.classList.remove('active');
             currentPage = 'main';
             currentPageId = null;
+            saveState();
         }
 
         function goToDonations() {
             goToDetailPage(translations[currentLanguage].donations, 'donations');
+        }
+
+        // localStorage functions
+        function saveState() {
+            const state = {
+                language: currentLanguage,
+                page: currentPage,
+                pageId: currentPageId
+            };
+            localStorage.setItem('appState', JSON.stringify(state));
+        }
+
+        function loadSavedState() {
+            const saved = localStorage.getItem('appState');
+            if (saved) {
+                const state = JSON.parse(saved);
+                currentLanguage = state.language || 'en';
+                currentPage = state.page || 'main';
+                currentPageId = state.pageId || null;
+            }
         }
     </script>
 </body>
