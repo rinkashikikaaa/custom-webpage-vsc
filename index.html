@@ -98,26 +98,47 @@
         /* Detail page container */
         .detail-container {
             display: none;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
+            flex-direction: row;
             min-height: 100vh;
-            padding-top: 120px;
+            padding-top: 80px;
             background-color: #F0ADC6;
+            gap: 20px;
+            padding: 100px 20px 20px 20px;
         }
 
         .detail-container.show {
             display: flex;
         }
 
-        /* Main title */
-        .main-title {
-            font-size: 72px;
-            font-weight: bold;
-            color: white;
-            text-align: center;
-            margin-bottom: 50px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        /* Left sidebar - Login/Profile */
+        .left-sidebar {
+            width: 28%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Right content - Title */
+        .right-content {
+            width: 72%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        /* White box styling */
+        .white-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .detail-title {
@@ -126,6 +147,7 @@
             color: white;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
         }
 
         /* Subtitle */
@@ -203,6 +225,133 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
+        /* Form elements */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: black;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="email"]:focus,
+        .form-group input[type="text"]:focus,
+        .form-group input[type="file"]:focus {
+            outline: none;
+            border-color: #F0ADC6;
+        }
+
+        /* Checkbox for notifications */
+        .notification-group {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+        }
+
+        .notification-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .notification-group label {
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        /* Login button */
+        .login-button {
+            background-color: #F0ADC6;
+            color: black;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(240, 173, 198, 0.4);
+        }
+
+        /* User profile section */
+        .user-profile {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999;
+            overflow: hidden;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: black;
+            text-align: center;
+        }
+
+        .profile-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .profile-button {
+            background-color: #F0ADC6;
+            color: black;
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .profile-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(240, 173, 198, 0.4);
+        }
+
         /* Donate button */
         .donate-button {
             position: fixed;
@@ -265,7 +414,7 @@
             display: block;
         }
 
-        .language-panel {
+        .panel {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -280,15 +429,15 @@
             transition: transform 0.3s ease;
         }
 
-        .language-panel.active {
+        .panel.active {
             transform: translate(-50%, -50%) scale(1);
         }
 
-        .language-panel-content {
+        .panel-content {
             text-align: center;
         }
 
-        .language-panel-title {
+        .panel-title {
             color: black;
             font-size: 18px;
             font-weight: 600;
@@ -324,7 +473,7 @@
             font-weight: 600;
         }
 
-        .language-confirm-button {
+        .confirm-button {
             background-color: #F0ADC6;
             color: black;
             border: none;
@@ -338,15 +487,154 @@
             transition: all 0.3s ease;
         }
 
-        .language-confirm-button.active {
+        .confirm-button.active {
             opacity: 1;
             pointer-events: all;
             box-shadow: 0 4px 12px rgba(240, 173, 198, 0.4);
         }
 
-        .language-confirm-button.active:hover {
+        .confirm-button.active:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(240, 173, 198, 0.5);
+        }
+
+        /* Verification code input */
+        .code-input-group {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .code-digit {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            transition: border-color 0.3s ease;
+        }
+
+        .code-digit:focus {
+            outline: none;
+            border-color: #F0ADC6;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Success message small */
+        .success-panel {
+            max-width: 350px;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .success-panel p {
+            color: black;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .success-button {
+            background-color: #F0ADC6;
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+
+        .success-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(240, 173, 198, 0.4);
+        }
+
+        /* Notifications drawer */
+        .notifications-drawer {
+            position: fixed;
+            top: 80px;
+            right: -400px;
+            width: 350px;
+            height: calc(100vh - 80px);
+            background-color: white;
+            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 250;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notifications-drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: black;
+        }
+
+        .drawer-close {
+            width: 30px;
+            height: 30px;
+            background-color: #F0ADC6;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .notification-item {
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Main title */
+        .main-title {
+            font-size: 72px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Responsive design */
@@ -371,10 +659,16 @@
             }
 
             .detail-container {
-                padding-top: 100px;
+                padding-top: 80px;
+                flex-direction: column;
             }
 
-            .language-panel {
+            .left-sidebar,
+            .right-content {
+                width: 100%;
+            }
+
+            .panel {
                 padding: 30px 20px;
             }
 
@@ -433,28 +727,90 @@
 
     <!-- Detail page -->
     <div class="detail-container" id="detailContainer">
-        <h1 class="detail-title" id="detailTitle">Business</h1>
+        <!-- Left sidebar -->
+        <div class="left-sidebar">
+            <div class="white-box" id="whiteBox">
+                <!-- Login form will be injected here -->
+            </div>
+        </div>
+
+        <!-- Right content -->
+        <div class="right-content">
+            <h1 class="detail-title" id="detailTitle">Business</h1>
+        </div>
     </div>
 
     <!-- Donate button -->
     <button class="donate-button" id="donateButton">❤️</button>
     <div class="donate-label" id="donateLabel">Donate!</div>
 
-    <!-- Language selection panel (hidden by default) -->
-    <div class="language-panel" id="languagePanel">
-        <div class="language-panel-content">
-            <p class="language-panel-title">Select your language</p>
+    <!-- Notifications drawer -->
+    <div class="notifications-drawer" id="notificationsDrawer">
+        <div class="drawer-header">
+            <span class="drawer-title" id="drawerTitle">Notifications</span>
+            <button class="drawer-close" id="drawerCloseBtn">✕</button>
+        </div>
+        <div class="drawer-content" id="drawerContent">
+            <!-- Notifications will be injected here -->
+        </div>
+    </div>
+
+    <!-- Language selection panel -->
+    <div class="panel" id="languagePanel">
+        <div class="panel-content">
+            <p class="panel-title">Select your language</p>
             <div class="language-options">
                 <button class="language-option" data-lang="ja">日本語</button>
                 <button class="language-option" data-lang="de">Deutsch</button>
                 <button class="language-option" data-lang="en" data-selected="true">English</button>
                 <button class="language-option" data-lang="es">Español</button>
             </div>
-            <button class="language-confirm-button" id="confirmButton">Confirm</button>
+            <button class="confirm-button" id="confirmButton">Confirm</button>
         </div>
     </div>
 
-    <!-- Overlay for language panel -->
+    <!-- Verification code panel -->
+    <div class="panel" id="verificationPanel">
+        <div class="panel-content">
+            <p class="panel-title" id="verificationTitle">Enter verification code</p>
+            <p id="verificationSubtitle" style="font-size: 12px; color: #666; margin-bottom: 20px;"></p>
+            <div class="code-input-group" id="codeInputGroup">
+                <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+                <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+                <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+                <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+                <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+                <input type="text" class="code-digit" maxlength="1" inputmode="numeric">
+            </div>
+            <div class="error-message" id="verificationError"></div>
+        </div>
+    </div>
+
+    <!-- Success message panel -->
+    <div class="panel" id="successPanel">
+        <div class="panel-content success-panel">
+            <p id="successMessage"></p>
+            <button class="success-button" id="successConfirmBtn">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Profile edit panel -->
+    <div class="panel" id="profileEditPanel">
+        <div class="panel-content">
+            <p class="panel-title" id="profileEditTitle">Personalizar perfil</p>
+            <div class="form-group">
+                <label id="photoLabel">Foto de perfil</label>
+                <input type="file" id="profilePhotoInput" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label id="usernameLabel">Nombre de usuario</label>
+                <input type="text" id="profileUsernameInput" placeholder="Nuevo nombre">
+            </div>
+            <button class="confirm-button active" id="profileConfirmBtn" style="margin-top: auto;">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Overlay for panels -->
     <div class="overlay" id="overlay"></div>
 
     <script>
@@ -474,7 +830,25 @@
                 language: 'Language',
                 confirm: 'Confirm',
                 donations: 'Donations',
-                donate: 'Donate!'
+                donate: 'Donate!',
+                email: 'Email',
+                emailPlaceholder: 'Enter your email',
+                notifications: 'Receive notifications',
+                notificationsText: 'I want to receive notifications about updates, news and discounts',
+                login: 'Login',
+                enterVerificationCode: 'Enter verification code',
+                verificationSent: 'A 6-digit code has been sent to your email',
+                incorrectCode: 'Incorrect code',
+                successTitle: 'Successfully verified!',
+                successMessage: 'Welcome! You can personalize your profile, make comments about products, about me or about the projects, and access product purchases or commissions!',
+                myPurchases: 'My Purchases',
+                notificationsTitle: 'Notifications',
+                personalizeProfile: 'Personalize Profile',
+                purchases: 'Purchases',
+                personalizeBtn: 'Personalizar Perfil',
+                photoProfile: 'Profile Photo',
+                username: 'Username',
+                newUsername: 'New username'
             },
             ja: {
                 welcome: 'ようこそ',
@@ -490,7 +864,25 @@
                 language: '言語',
                 confirm: '確認',
                 donations: '寄付',
-                donate: '寄付する！'
+                donate: '寄付する！',
+                email: 'メール',
+                emailPlaceholder: 'メールアドレスを入力してください',
+                notifications: '通知を受け取る',
+                notificationsText: '更新、ニュース、割引に関する通知を受け取りたいです',
+                login: 'ログイン',
+                enterVerificationCode: '検証コードを入力してください',
+                verificationSent: '6桁のコードをメールに送信しました',
+                incorrectCode: 'コードが正しくありません',
+                successTitle: '検証に成功しました！',
+                successMessage: 'ようこそ！プロフィールをカスタマイズできます。製品、私、またはプロジェクトについてコメントを作成でき、製品の購入またはコミッションにアクセスできます！',
+                myPurchases: '私の購入',
+                notificationsTitle: '通知',
+                personalizeProfile: 'プロフィールをカスタマイズ',
+                purchases: '購入',
+                personalizeBtn: 'プロフィールをカスタマイズ',
+                photoProfile: 'プロフィール写真',
+                username: 'ユーザー名',
+                newUsername: '新しいユーザー名'
             },
             de: {
                 welcome: 'Willkommen',
@@ -506,7 +898,25 @@
                 language: 'Sprache',
                 confirm: 'Bestätigen',
                 donations: 'Spenden',
-                donate: 'Spenden!'
+                donate: 'Spenden!',
+                email: 'E-Mail',
+                emailPlaceholder: 'Geben Sie Ihre E-Mail-Adresse ein',
+                notifications: 'Benachrichtigungen erhalten',
+                notificationsText: 'Ich möchte Benachrichtigungen über Updates, Nachrichten und Rabatte erhalten',
+                login: 'Anmelden',
+                enterVerificationCode: 'Verificationscode eingeben',
+                verificationSent: 'Ein 6-stelliger Code wurde an Ihre E-Mail gesendet',
+                incorrectCode: 'Code ist falsch',
+                successTitle: 'Erfolgreich verifiziert!',
+                successMessage: 'Willkommen! Sie können Ihr Profil personalisieren, Kommentare zu Produkten, über mich oder über die Projekte schreiben und auf Produktkäufe oder Provisionen zugreifen!',
+                myPurchases: 'Meine Käufe',
+                notificationsTitle: 'Benachrichtigungen',
+                personalizeProfile: 'Profil personalisieren',
+                purchases: 'Käufe',
+                personalizeBtn: 'Profil personalisieren',
+                photoProfile: 'Profilfoto',
+                username: 'Benutzername',
+                newUsername: 'Neuer Benutzername'
             },
             es: {
                 welcome: 'Bienvenido',
@@ -522,19 +932,42 @@
                 language: 'Idioma',
                 confirm: 'Confirmar',
                 donations: 'Donaciones',
-                donate: '¡Donar!'
+                donate: '¡Donar!',
+                email: 'Correo',
+                emailPlaceholder: 'Ingresa tu correo',
+                notifications: 'Recibir notificaciones',
+                notificationsText: 'Quiero recibir notificaciones sobre actualizaciones, noticias y descuentos',
+                login: 'Iniciar sesión',
+                enterVerificationCode: 'Ingresa el código de verificación',
+                verificationSent: 'Se envió un código de 6 dígitos a tu correo',
+                incorrectCode: 'Código incorrecto',
+                successTitle: '¡Verificado exitosamente!',
+                successMessage: '¡Bienvenido! Puedes personalizar tu perfil, hacer comentarios sobre los productos, sobre mí o sobre los proyectos, y acceder a la compra de productos o comisiones!',
+                myPurchases: 'Mis compras',
+                notificationsTitle: 'Notificaciones',
+                personalizeProfile: 'Personalizar perfil',
+                purchases: 'Compras',
+                personalizeBtn: 'Personalizar perfil',
+                photoProfile: 'Foto de perfil',
+                username: 'Nombre de usuario',
+                newUsername: 'Nuevo nombre de usuario'
             }
         };
 
         let currentLanguage = 'en';
         let selectedLanguage = 'en';
-        let currentPage = 'main'; // 'main' or 'detail'
+        let currentPage = 'main';
         let currentPageId = null;
+        let userSession = null;
+        let nextUserId = 1;
 
         // DOM elements
         const languageLabel = document.querySelector('.language-label');
         const languageSection = document.getElementById('languageSection');
         const languagePanel = document.getElementById('languagePanel');
+        const verificationPanel = document.getElementById('verificationPanel');
+        const successPanel = document.getElementById('successPanel');
+        const profileEditPanel = document.getElementById('profileEditPanel');
         const overlay = document.getElementById('overlay');
         const confirmButton = document.getElementById('confirmButton');
         const languageOptions = document.querySelectorAll('.language-option');
@@ -548,54 +981,40 @@
         const backButton = document.getElementById('backButton');
         const donateButton = document.getElementById('donateButton');
         const donateLabel = document.getElementById('donateLabel');
+        const whiteBox = document.getElementById('whiteBox');
+        const notificationsDrawer = document.getElementById('notificationsDrawer');
+        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
 
         // Initialize
         initialize();
 
         function initialize() {
-            // Load saved language and page from localStorage
             loadSavedState();
-            
             updatePageText(currentLanguage);
             setDefaultLanguageOption();
             setupEventListeners();
-            
-            // Restore page state if needed
+
             if (currentPage === 'detail' && currentPageId) {
                 restoreDetailPage();
             }
         }
 
         function setupEventListeners() {
-            // Language section click
             languageSection.addEventListener('click', openLanguagePanel);
-
-            // Overlay click
-            overlay.addEventListener('click', closeLanguagePanel);
-
-            // Language options click
+            overlay.addEventListener('click', closeAllPanels);
             languageOptions.forEach(option => {
                 option.addEventListener('click', selectLanguageOption);
             });
-
-            // Confirm button click
             confirmButton.addEventListener('click', confirmLanguage);
-
-            // Nav buttons click
             navButtons.forEach(button => {
                 button.addEventListener('click', handleNavButtonClick);
             });
-
-            // Sub buttons click
             subButtons.forEach(button => {
                 button.addEventListener('click', handleSubButtonClick);
             });
-
-            // Back button click
             backButton.addEventListener('click', goBackToMain);
-
-            // Donate button click
             donateButton.addEventListener('click', goToDonations);
+            drawerCloseBtn.addEventListener('click', closeNotificationsDrawer);
         }
 
         function openLanguagePanel() {
@@ -603,20 +1022,18 @@
             overlay.classList.add('active');
         }
 
-        function closeLanguagePanel() {
+        function closeAllPanels() {
             languagePanel.classList.remove('active');
+            verificationPanel.classList.remove('active');
+            successPanel.classList.remove('active');
+            profileEditPanel.classList.remove('active');
             overlay.classList.remove('active');
         }
 
         function selectLanguageOption(e) {
-            // Remove previous selection
             languageOptions.forEach(option => option.classList.remove('selected'));
-
-            // Add selection to clicked option
             e.target.classList.add('selected');
             selectedLanguage = e.target.dataset.lang;
-
-            // Enable confirm button
             confirmButton.classList.add('active');
         }
 
@@ -626,37 +1043,21 @@
                 updatePageText(currentLanguage);
                 saveState();
             }
-            closeLanguagePanel();
+            closeAllPanels();
         }
 
         function updatePageText(lang) {
             const t = translations[lang];
-
-            // Update main title
             document.querySelector('.main-title').textContent = t.welcome;
-
-            // Update subtitle
             document.querySelector('.subtitle').textContent = t.whatDo;
-
-            // Update language label
             languageLabel.textContent = t.language;
-
-            // Update language panel title
-            document.querySelector('.language-panel-title').textContent = t.selectLanguage;
-
-            // Update confirm button
-            confirmButton.textContent = t.confirm;
-
-            // Update donate label
             donateLabel.textContent = t.donate;
 
-            // Update nav buttons
             const businessBtn = navButtons[0];
             const userBtn = navButtons[1];
             businessBtn.textContent = t.business;
             userBtn.textContent = t.user;
 
-            // Update submenus
             const businessSubButtons = businessSubmenu.querySelectorAll('.sub-button');
             businessSubButtons[0].textContent = t.aboutMe;
             businessSubButtons[1].textContent = t.portfolio;
@@ -667,10 +1068,10 @@
             userSubButtons[2].textContent = t.merch;
             userSubButtons[3].textContent = t.projects;
 
-            // Update detail title if on detail page
             if (currentPage === 'detail' && currentPageId) {
                 const pageTitle = getPageTitle(currentPageId, lang);
                 detailTitle.textContent = pageTitle;
+                renderDetailPage();
             }
         }
 
@@ -685,12 +1086,9 @@
 
         function handleNavButtonClick(e) {
             const section = e.target.dataset.section;
-
-            // Hide all submenus
             businessSubmenu.classList.remove('active');
             userSubmenu.classList.remove('active');
 
-            // Show selected submenu
             if (section === 'business') {
                 businessSubmenu.classList.add('active');
             } else if (section === 'user') {
@@ -713,7 +1111,8 @@
                 'socials': t.socials,
                 'merch': t.merch,
                 'projects': t.projects,
-                'donations': t.donations
+                'donations': t.donations,
+                'my-purchases': t.myPurchases
             };
             return titles[pageId] || pageId;
         }
@@ -727,6 +1126,180 @@
             currentPage = 'detail';
             currentPageId = pageId;
             saveState();
+            renderDetailPage();
+        }
+
+        function renderDetailPage() {
+            const t = translations[currentLanguage];
+            whiteBox.innerHTML = '';
+
+            if (!userSession) {
+                // Login form
+                whiteBox.innerHTML = `
+                    <div class="form-group">
+                        <label>${t.email}</label>
+                        <input type="email" id="emailInput" placeholder="${t.emailPlaceholder}">
+                    </div>
+                    <div class="notification-group">
+                        <input type="checkbox" id="notificationCheckbox">
+                        <label for="notificationCheckbox">${t.notificationsText}</label>
+                    </div>
+                    <button class="login-button" id="loginBtn">${t.login}</button>
+                `;
+                document.getElementById('loginBtn').addEventListener('click', handleLogin);
+            } else {
+                // User profile
+                whiteBox.innerHTML = `
+                    <div class="user-profile">
+                        <div class="profile-avatar" id="profileAvatar">${userSession.avatar || 'No Image'}</div>
+                        <div class="profile-name">${userSession.username}</div>
+                        <div class="profile-buttons">
+                            <button class="profile-button" id="purchasesBtn">${t.purchases}</button>
+                            <button class="profile-button" id="notificationsBtn">${t.notificationsTitle}</button>
+                            <button class="profile-button" id="personalizeBtn">${t.personalizeProfile}</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('purchasesBtn').addEventListener('click', () => goToDetailPage(t.myPurchases, 'my-purchases'));
+                document.getElementById('notificationsBtn').addEventListener('click', openNotificationsDrawer);
+                document.getElementById('personalizeBtn').addEventListener('click', openProfileEdit);
+            }
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('emailInput').value;
+            if (!email) return;
+
+            // Generate random code
+            const code = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+            sessionStorage.setItem('verificationCode', code);
+            sessionStorage.setItem('verificationEmail', email);
+
+            showVerificationPanel(email);
+        }
+
+        function showVerificationPanel(email) {
+            const t = translations[currentLanguage];
+            document.getElementById('verificationTitle').textContent = t.enterVerificationCode;
+            document.getElementById('verificationSubtitle').textContent = t.verificationSent + ': ' + email;
+            document.getElementById('verificationError').textContent = '';
+            document.getElementById('verificationError').classList.remove('show');
+
+            const codeInputs = document.querySelectorAll('.code-digit');
+            codeInputs.forEach((input, index) => {
+                input.value = '';
+                input.addEventListener('input', (e) => {
+                    if (e.target.value && index < codeInputs.length - 1) {
+                        codeInputs[index + 1].focus();
+                    }
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        codeInputs[index - 1].focus();
+                    }
+                });
+                input.addEventListener('change', checkVerificationCode);
+            });
+
+            verificationPanel.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        function checkVerificationCode() {
+            const codeInputs = document.querySelectorAll('.code-digit');
+            const enteredCode = Array.from(codeInputs).map(input => input.value).join('');
+
+            if (enteredCode.length === 6) {
+                const correctCode = sessionStorage.getItem('verificationCode');
+                if (enteredCode === correctCode) {
+                    createUserSession();
+                } else {
+                    const t = translations[currentLanguage];
+                    document.getElementById('verificationError').textContent = t.incorrectCode;
+                    document.getElementById('verificationError').classList.add('show');
+                }
+            }
+        }
+
+        function createUserSession() {
+            const email = sessionStorage.getItem('verificationEmail');
+            const userId = nextUserId++;
+            userSession = {
+                userId: userId,
+                email: email,
+                username: `Usuario${userId}`,
+                avatar: null,
+                wantNotifications: document.getElementById('notificationCheckbox').checked
+            };
+
+            showSuccessPanel();
+        }
+
+        function showSuccessPanel() {
+            const t = translations[currentLanguage];
+            document.getElementById('successMessage').textContent = t.successMessage;
+            successPanel.classList.add('active');
+            overlay.classList.add('active');
+
+            document.getElementById('successConfirmBtn').onclick = () => {
+                verificationPanel.classList.remove('active');
+                successPanel.classList.remove('active');
+                overlay.classList.remove('active');
+                saveState();
+                renderDetailPage();
+            };
+        }
+
+        function openNotificationsDrawer() {
+            notificationsDrawer.classList.add('open');
+            const t = translations[currentLanguage];
+            document.getElementById('drawerTitle').textContent = t.notificationsTitle;
+            const drawerContent = document.getElementById('drawerContent');
+            drawerContent.innerHTML = `
+                <div class="notification-item">New product launch!</div>
+                <div class="notification-item">Special discount 20%</div>
+                <div class="notification-item">Project update available</div>
+            `;
+        }
+
+        function closeNotificationsDrawer() {
+            notificationsDrawer.classList.remove('open');
+        }
+
+        function openProfileEdit() {
+            const t = translations[currentLanguage];
+            document.getElementById('profileEditTitle').textContent = t.personalizeProfile;
+            document.getElementById('photoLabel').textContent = t.photoProfile;
+            document.getElementById('usernameLabel').textContent = t.username;
+            document.getElementById('profileUsernameInput').value = userSession.username;
+
+            profileEditPanel.classList.add('active');
+            overlay.classList.add('active');
+
+            document.getElementById('profileConfirmBtn').onclick = () => {
+                const newUsername = document.getElementById('profileUsernameInput').value;
+                if (newUsername) {
+                    userSession.username = newUsername;
+                }
+
+                const fileInput = document.getElementById('profilePhotoInput');
+                if (fileInput.files.length > 0) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        userSession.avatar = e.target.result;
+                        saveState();
+                        profileEditPanel.classList.remove('active');
+                        overlay.classList.remove('active');
+                        renderDetailPage();
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    saveState();
+                    profileEditPanel.classList.remove('active');
+                    overlay.classList.remove('active');
+                    renderDetailPage();
+                }
+            };
         }
 
         function restoreDetailPage() {
@@ -736,6 +1309,7 @@
             detailTitle.textContent = pageTitle;
             backButton.classList.add('show');
             languageSection.classList.add('hidden');
+            renderDetailPage();
         }
 
         function goBackToMain() {
@@ -751,15 +1325,16 @@
         }
 
         function goToDonations() {
-            goToDetailPage(translations[currentLanguage].donations, 'donations');
+            const t = translations[currentLanguage];
+            goToDetailPage(t.donations, 'donations');
         }
 
-        // localStorage functions
         function saveState() {
             const state = {
                 language: currentLanguage,
                 page: currentPage,
-                pageId: currentPageId
+                pageId: currentPageId,
+                userSession: userSession
             };
             localStorage.setItem('appState', JSON.stringify(state));
         }
@@ -771,6 +1346,7 @@
                 currentLanguage = state.language || 'en';
                 currentPage = state.page || 'main';
                 currentPageId = state.pageId || null;
+                userSession = state.userSession || null;
             }
         }
     </script>
